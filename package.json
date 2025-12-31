@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "version": "1.0.50",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "bun run --watch src/app.ts"
+  },
+  "dependencies": {
+    "@elysiajs/jwt": "^1.4.0",
+    "@prisma/client": "^7.2.0",
+    "@prisma/internals": "^7.2.0",
+    "@prisma/sdk": "^4.0.0",
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "elysia": "latest",
+    "postgres": "^3.4.7"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "bun-types": "latest"
+  },
+  "module": "src/index.js"
+}
