@@ -29,26 +29,21 @@ export const bookRoute = new Elysia({ prefix: "/books" })
         author: t.String(),
         publisher: t.String(),
         year: t.Number(),
-        stock: t.Number({ minimum: 0 })
-      })
-    }
+        stock: t.Number({ minimum: 0 }),
+      }),
+    },
   )
 
   // PUT /books/:id
-  .put(
-    "/:id",
-    async ({ params, body }) => {
-      return Response.json(
-        await BookService.updateBook(params.id as string, body as Partial<CreateBookDTO>)
-      );
-    }
-  )
+  .put("/:id", async ({ params, body }) => {
+    return Response.json(
+      await BookService.updateBook(
+        params.id as string,
+        body as Partial<CreateBookDTO>,
+      ),
+    );
+  })
 
-  .delete(
-    "/:id",
-    async ({ params }) => {
-      return Response.json(
-        await BookService.deleteBook(params.id as string)
-      );
-    }
-  )
+  .delete("/:id", async ({ params }) => {
+    return Response.json(await BookService.deleteBook(params.id as string));
+  });

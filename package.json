@@ -17,7 +17,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "prettier": "3.7.4"
   },
   "module": "src/index.js"
 }

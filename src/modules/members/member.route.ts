@@ -10,14 +10,18 @@ export const memberRoute = new Elysia({ prefix: "/members" })
   })
 
   // GET /members/:id
-  .get("/:id", async ({ params }) => {
-    const member = await MemberService.getMemberById(params.id);
-    return Response.json(member);
-  }, {
-    params: t.Object({
-      id: t.String({ minLength: 1 })
-    })
-  })
+  .get(
+    "/:id",
+    async ({ params }) => {
+      const member = await MemberService.getMemberById(params.id);
+      return Response.json(member);
+    },
+    {
+      params: t.Object({
+        id: t.String({ minLength: 1 }),
+      }),
+    },
+  )
 
   // POST /members
   .post(
@@ -30,25 +34,20 @@ export const memberRoute = new Elysia({ prefix: "/members" })
         id: t.String(),
         name: t.String(),
         study_program: t.String(),
-        semester: t.Number({ minimum: 1 })
-      })
-    }
+        semester: t.Number({ minimum: 1 }),
+      }),
+    },
   )
 
-  .put(
-    "/:id",
-    async ({ params, body }) => {
-        return Response.json(
-            await MemberService.updateMember(params.id as string, body as Partial<CreateMemberDTO>)
-        );
-    }
-  )
+  .put("/:id", async ({ params, body }) => {
+    return Response.json(
+      await MemberService.updateMember(
+        params.id as string,
+        body as Partial<CreateMemberDTO>,
+      ),
+    );
+  })
 
-  .delete(
-    "/:id",
-    async ({ params }) => {
-        return Response.json(
-            await MemberService.deleteMember(params.id as string)
-        );
-    }
-  )
+  .delete("/:id", async ({ params }) => {
+    return Response.json(await MemberService.deleteMember(params.id as string));
+  });

@@ -1,11 +1,11 @@
 import { Elysia, t } from "elysia";
 import jwt from "@elysiajs/jwt";
 import { AdminService } from "./admin.service";
-import { 
-    AdminJwtPayload, 
-    AdminResponse, 
-    LoginAdminDTO,
-    CreateAdminDTO 
+import {
+  AdminJwtPayload,
+  AdminResponse,
+  LoginAdminDTO,
+  CreateAdminDTO,
 } from "./admin.model";
 import { env } from "../../config/env";
 
@@ -14,7 +14,7 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
     jwt({
       name: "jwt",
       secret: env.jwt.secret as string,
-    })
+    }),
   )
 
   // GET /admin/me - Ambil data admin yang sedang login (protected)
@@ -58,38 +58,36 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
       detail: {
         tags: ["Admin"],
         summary: "Profil Admin",
-        description: "Mengambil data admin yang sedang login menggunakan JWT token",
+        description:
+          "Mengambil data admin yang sedang login menggunakan JWT token",
         security: [{ Bearer: [] }], // untuk Swagger/OpenAPI
       },
-    }
+    },
   )
 
   // POST admin register
-  .post(
-    "/register",
-    async ({ body }) => {
-        const adminData = await AdminService.register(body as CreateAdminDTO);
+  .post("/register", async ({ body }) => {
+    const adminData = await AdminService.register(body as CreateAdminDTO);
 
-        if (!adminData) {
-            return Response.json(
-                { message: "Username sudah digunakan" },
-                { status: 409 }
-            );
-        }
-
-        return Response.json(
-            {
-                message: "Registrasi berhasil",
-                admin: {
-                    id: adminData.id,
-                    username: adminData.username,
-                    created_at: adminData.created_at
-                },
-            },
-            { status: 201 }
-        )
+    if (!adminData) {
+      return Response.json(
+        { message: "Username sudah digunakan" },
+        { status: 409 },
+      );
     }
-  )
+
+    return Response.json(
+      {
+        message: "Registrasi berhasil",
+        admin: {
+          id: adminData.id,
+          username: adminData.username,
+          created_at: adminData.created_at,
+        },
+      },
+      { status: 201 },
+    );
+  })
 
   // POST admin login
   .post(
@@ -100,7 +98,7 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
       if (!admin) {
         return Response.json(
           { message: "Username atau password salah" },
-          { status: 401 } // Unauthorized
+          { status: 401 }, // Unauthorized
         );
       }
 
@@ -119,7 +117,7 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
             username: admin.username,
           } as AdminResponse,
         },
-        { status: 200 } // OK
+        { status: 200 }, // OK
       );
     },
     {
@@ -138,5 +136,5 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
         summary: "Login Admin",
         description: "Autentikasi admin dan mengembalikan JWT token",
       },
-    }
+    },
   );

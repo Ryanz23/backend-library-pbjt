@@ -52,5 +52,5 @@ export const BookRepository = {
     await db`
       DELETE FROM books WHERE id = ${id}
     `;
-  }
+  },
 };

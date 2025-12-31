@@ -47,17 +47,20 @@ src/
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Clone Repository
+
 ```bash
 git clone <repository-url>
 cd library-backend
 ```
 
 ### 2️⃣ Install Dependencies
+
 ```bash
 bun install
 ```
 
 ## ▶️ Run Server
+
 ```bash
 bun run dev
 ```
@@ -65,47 +68,52 @@ bun run dev
 ## 📌 API Endpoints
 
 ### 📚 Books
+
 ```md
-| Method | Endpoint        | Description          |
-|--------|-----------------|----------------------|
-| GET    | `/books`        | Ambil semua buku     |
-| GET    | `/books/:id`    | Ambil buku (id)      |
-| POST   | `/books`        | Tambah buku          |
-| PUT    | `/books/:id`    | Update buku (id)     |
-| DELETE | `/books/:id`    | Hapus buku (id)      |
+| Method | Endpoint     | Description      |
+| ------ | ------------ | ---------------- |
+| GET    | `/books`     | Ambil semua buku |
+| GET    | `/books/:id` | Ambil buku (id)  |
+| POST   | `/books`     | Tambah buku      |
+| PUT    | `/books/:id` | Update buku (id) |
+| DELETE | `/books/:id` | Hapus buku (id)  |
 ```
 
 ### 👤 Members
+
 ```md
-| Method | Endpoint        | Description           |
-|--------|-----------------|-----------------------|
-| GET    | `/members`      | Ambil semua member    |
-| GET    | `/members/:id`  | Ambil member (id)     |
-| POST   | `/members`      | Tambah member         |
-| PUT    | `/members/:id`  | Update member (id)    |
-| DELETE | `/members/:id`  | Hapus member (id)     |
+| Method | Endpoint       | Description        |
+| ------ | -------------- | ------------------ |
+| GET    | `/members`     | Ambil semua member |
+| GET    | `/members/:id` | Ambil member (id)  |
+| POST   | `/members`     | Tambah member      |
+| PUT    | `/members/:id` | Update member (id) |
+| DELETE | `/members/:id` | Hapus member (id)  |
 ```
 
 ### 🔄 Loans
+
 ```md
-| Method | Endpoint        | Description           |
-|--------|-----------------|-----------------------|
-| GET    | `/loans`        | Ambil semua data      |
-| GET    | `/loans/:id`    | Ambil data (id)       |
-| POST   | `/loans`        | Tambah pinjaman       |
-| PUT    | `/loans/:id`    | Update pinjaman (id)  |
-| DELETE | `/loans/:id`    | Hapus pinjaman (id)   |
+| Method | Endpoint     | Description          |
+| ------ | ------------ | -------------------- |
+| GET    | `/loans`     | Ambil semua data     |
+| GET    | `/loans/:id` | Ambil data (id)      |
+| POST   | `/loans`     | Tambah pinjaman      |
+| PUT    | `/loans/:id` | Update pinjaman (id) |
+| DELETE | `/loans/:id` | Hapus pinjaman (id)  |
 ```
 
 ### 🔐 Admin
+
 ```md
-| Method | Endpoint           | Description        |
-|--------|--------------------|--------------------|
-| POST   | `/admins/register` | Tambah admin baru  |
-| POST   | `/admins/login`    | Login admin        |
+| Method | Endpoint           | Description       |
+| ------ | ------------------ | ----------------- |
+| POST   | `/admins/register` | Tambah admin baru |
+| POST   | `/admins/login`    | Login admin       |
 ```
 
 ## 🧪 Testing (cURL)
+
 ```bash
 curl -X POST http://localhost:3000/members \
 -H "Content-Type: application/json" \
@@ -118,4 +126,5 @@ curl -X POST http://localhost:3000/members \
 ```
 
 ## 👤 Author
+
 Ariyan Andryan Aryja - Politeknik Baja Tegal - Teknik Informatika

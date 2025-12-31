@@ -47,5 +47,5 @@ export const MemberRepository = {
     await db`
       DELETE FROM members WHERE id = ${id}
     `;
-  }
+  },
 };

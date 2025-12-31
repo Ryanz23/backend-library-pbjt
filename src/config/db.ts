@@ -6,5 +6,5 @@ export const db = postgres({
   port: env.db.port,
   database: env.db.name,
   username: env.db.user,
-  password: env.db.password
+  password: env.db.password,
 });

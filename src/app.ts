@@ -13,5 +13,5 @@ export const app = new Elysia()
   .use(loanRoute)
 
   .listen(env.app.port, () => {
-  console.log(`Server running on http://localhost:${process.env.APP_PORT}`);
-});
+    console.log(`Server running on http://localhost:${process.env.APP_PORT}`);
+  });
