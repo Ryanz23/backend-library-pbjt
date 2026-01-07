@@ -4,16 +4,36 @@ import { CreateBookDTO } from "./book.model";
 
 export const bookRoute = new Elysia({ prefix: "/books" })
   // GET /books
-  .get("/", async () => {
-    const books = await BookService.getAllBooks();
-    return Response.json(books);
-  })
+  .get(
+    "/",
+    async () => {
+      const books = await BookService.getAllBooks();
+      return Response.json(books);
+    },
+    {
+      detail: {
+        tags: ["Book"],
+        summary: "Get All Books",
+        description: "Mengambil seluruh data buku yang tersedia di sistem",
+      },
+    },
+  )
 
   // GET /books/:id
-  .get("/:id", async ({ params }) => {
-    const book = await BookService.getBookById(params.id);
-    return Response.json(book);
-  })
+  .get(
+    "/:id",
+    async ({ params }) => {
+      const book = await BookService.getBookById(params.id);
+      return Response.json(book);
+    },
+    {
+      detail: {
+        tags: ["Book"],
+        summary: "Get Book By ID",
+        description: "Mengambil detail data buku berdasarkan ID",
+      },
+    },
+  )
 
   // POST /books
   .post(
@@ -31,19 +51,54 @@ export const bookRoute = new Elysia({ prefix: "/books" })
         year: t.Number(),
         stock: t.Number({ minimum: 0 }),
       }),
+      detail: {
+        tags: ["Book"],
+        summary: "Add New Book",
+        description: "Menambahkan data buku baru ke dalam sistem",
+      },
     },
   )
 
   // PUT /books/:id
-  .put("/:id", async ({ params, body }) => {
-    return Response.json(
-      await BookService.updateBook(
-        params.id as string,
-        body as Partial<CreateBookDTO>,
-      ),
-    );
-  })
+  .put(
+    "/:id",
+    async ({ params, body }) => {
+      return Response.json(
+        await BookService.updateBook(
+          params.id as string,
+          body as Partial<CreateBookDTO>,
+        ),
+      );
+    },
+    {
+      body: t.Object({
+        id: t.String(),
+        title: t.String(),
+        category: t.String(),
+        author: t.String(),
+        publisher: t.String(),
+        year: t.Number(),
+        stock: t.Number({ minimum: 0 }),
+      }),
+      detail: {
+        tags: ["Book"],
+        summary: "Update Book",
+        description: "Memperbarui data buku berdasarkan ID",
+      },
+    },
+  )
 
-  .delete("/:id", async ({ params }) => {
-    return Response.json(await BookService.deleteBook(params.id as string));
-  });
+  // DELETE /books/:id
+  .delete(
+    "/:id",
+    async ({ params }) => {
+      return Response.json(await BookService.deleteBook(params.id as string));
+    },
+    {
+      detail: {
+        tags: ["Book"],
+        summary: "Delete Book",
+        description: "Menghapus data buku berdasarkan ID",
+      },
+    },
+  );
