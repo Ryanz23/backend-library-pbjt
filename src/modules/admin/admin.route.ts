@@ -104,4 +104,42 @@ export const adminRoute = new Elysia({ prefix: "/admin" })
         security: [{ Bearer: [] }],
       },
     },
+  )
+
+  .put(
+    "/me",
+    async ({ admin, body }) => {
+      const updateAdmin = await AdminService.updateAdmin(
+        admin.id,
+        body as Partial<CreateAdminDTO>,
+      );
+
+      return {
+        message: "Profil admin berhasil di perbarui",
+        admin: updateAdmin,
+      };
+    },
+    {
+      body: t.Object({
+        username: t.Optional(
+          t.String({
+            minLength: 3,
+            error: "Username minimal 3 karakter",
+          }),
+        ),
+        password: t.Optional(
+          t.String({
+            minLength: 6,
+            error: "Password minimal 6 karakter",
+          }),
+        ),
+      }),
+      detail: {
+        tags: ["Admin"],
+        summary: "Update Profile Admin",
+        description:
+          "Memperbarui username dan/atau password admin yang sedang login",
+        security: [{ Bearer: [] }],
+      },
+    },
   );
