@@ -19,33 +19,6 @@ export const app = new Elysia()
           description:
             "REST API untuk sistem perpustakaan Politeknik Baja Tegal. Digunakan untuk mengelola data buku, member, admin, serta transaksi peminjaman dan pengembalian buku.",
         },
-        tags: [
-          {
-            name: "Admin",
-            description: "Manajemen akun admin dan autentikasi",
-          },
-          {
-            name: "Book",
-            description: "Manajemen data buku perpustakaan",
-          },
-          {
-            name: "Member",
-            description: "Manajemen data anggota perpustakaan",
-          },
-          {
-            name: "Loans",
-            description: "Transaksi peminjaman dan pengembalian buku",
-          },
-        ],
-        components: {
-          securitySchemes: {
-            Bearer: {
-              type: "http",
-              scheme: "bearer",
-              bearerFormat: "JWT",
-            },
-          },
-        },
       },
     }),
   )
