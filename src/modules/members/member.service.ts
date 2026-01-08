@@ -1,5 +1,6 @@
 import { MemberRepository } from "./member.repository";
 import { CreateMemberDTO } from "./member.model";
+import { AppError } from "../../handler/error";
 
 export const MemberService = {
   async getAllMembers() {
@@ -8,13 +9,15 @@ export const MemberService = {
 
   async getMemberById(id: string) {
     const member = await MemberRepository.findById(id);
-    if (!member) throw new Error("Member tidak ditemukan");
+    if (!member) {
+      throw new AppError("Member tidak ditemukan", 404);
+    }
     return member;
   },
 
   async addMember(data: CreateMemberDTO) {
     if (data.semester < 1 || data.semester > 14) {
-      throw new Error("Semester tidak valid");
+      throw new AppError("Semester tidak valid", 400);
     }
 
     await MemberRepository.create(data);
@@ -26,7 +29,9 @@ export const MemberService = {
 
   async updateMember(id: string, data: Partial<CreateMemberDTO>) {
     const member = await MemberRepository.findById(id);
-    if (!member) throw new Error("Member tidak ditemukan");
+    if (!member) {
+      throw new AppError("Member tidak ditemukan", 404);
+    }
 
     await MemberRepository.update(id, data);
     return {
@@ -36,7 +41,9 @@ export const MemberService = {
 
   async deleteMember(id: string) {
     const member = await MemberRepository.findById(id);
-    if (!member) throw new Error("Member tidak ditemukan");
+    if (!member) {
+      throw new AppError("Member tidak ditemukan", 404);
+    }
 
     await MemberRepository.delete(id);
     return {
