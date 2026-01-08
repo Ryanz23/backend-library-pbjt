@@ -72,10 +72,10 @@ export const memberRoute = new Elysia({ prefix: "/members" })
     },
     {
       body: t.Object({
-        id: t.String(),
-        name: t.String(),
-        study_program: t.String(),
-        semester: t.Number({ minimum: 1, maximum: 14 }),
+        id: t.Optional(t.String()),
+        name: t.Optional(t.String()),
+        study_program: t.Optional(t.String()),
+        semester: t.Optional(t.Number({ minimum: 1, maximum: 14 })),
       }),
       detail: {
         tags: ["Member"],
