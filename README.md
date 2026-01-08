@@ -161,6 +161,7 @@ http://localhost:3000
 | GET    | `/admin/me`       | Ambil data admin  |
 | POST   | `/admin/register` | Tambah admin baru |
 | POST   | `/admin/login`    | Login admin       |
+| PUT    | `/admin/me`       | Update admin      |
 ```
 
 ## 🧪 Testing (cURL)
