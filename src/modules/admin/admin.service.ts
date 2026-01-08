@@ -70,4 +70,65 @@ export const AdminService = {
   async hashPassword(password: string): Promise<string> {
     return await bcrypt.hash(password, 10);
   },
+
+  async updateAdmin(
+    id: string,
+    data: Partial<{ username: string; password: string }>,
+  ): Promise<AdminResponse> {
+    const existingAdmin = await db<AdminResponse[]>`
+      SELECT id, username, created_at
+      FROM admins
+      WHERE id = ${id}
+    `;
+
+    if (existingAdmin.length === 0) {
+      throw new AppError("Admin tidak ditemukan", 404);
+    }
+
+    const currentAdmin = existingAdmin[0];
+
+    if (data.username && data.username !== currentAdmin.username) {
+      const usernameTaken = await db<{ id: string }[]>`
+        SELECT id
+        FROM admins
+        WHERE username = ${data.username}
+        AND id != ${id}
+      `;
+
+      if (usernameTaken.length > 0) {
+        throw new AppError("Username sudah digunakan", 409);
+      }
+    }
+
+    if (!data.username && !data.password) {
+      return currentAdmin;
+    }
+
+    let hashedPassword: string | undefined;
+    if (data.password) {
+      hashedPassword = await this.hashPassword(data.password);
+    }
+
+    if (data.username && hashedPassword) {
+      await db`
+        UPDATE admins
+        SET username = ${data.username},
+        password = ${hashedPassword}
+        WHERE id = ${id}
+      `;
+    } else if (data.username) {
+      await db`
+        UPDATE admins
+        SET username = ${data.username}
+        WHERE id = ${id}
+      `;
+    } else if (hashedPassword) {
+      await db`
+        UPDATE admins
+        SET password = ${hashedPassword}
+        WHERE id = ${id}
+      `;
+    }
+    return this.getAdminById(id);
+  },
 };
